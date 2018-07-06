@@ -1,0 +1,32 @@
+{
+  "name": "nodejsexpresscalculator",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "js": "browserify javascripts/bundle.js | uglifyjs > public/javascripts/bundle.js",
+    "css": "scss scss/myStyle.scss -t compressed public/css/style.css",
+    "prestart": "npm run css && npm run javascripts",
+    "start": "node ./bin/www"
+  },
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "bowserify": "^10.2.1",
+    "cookie-parser": "~1.4.3",
+    "debug": "~2.6.9",
+    "express": "^4.16.3",
+    "form-data": "^2.3.2",
+    "http-errors": "~1.6.2",
+    "jquery": "^3.3.1",
+    "jsdom": "^11.11.0",
+    "json-parser": "^1.1.5",
+    "md5": "^2.2.1",
+    "mongoose": "^5.2.1",
+    "morgan": "~1.9.0",
+    "nodemailer": "^4.6.7",
+    "nodemon": "^1.17.5",
+    "pug": "2.0.0-beta11",
+    "serve-favicon": "^2.5.0",
+    "tls-connect": "^0.2.2",
+    "uglify-js": "^3.3.21"
+  }
+}

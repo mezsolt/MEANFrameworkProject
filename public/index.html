@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>City list Web Application</title>
+    <link rel="stylesheet" href="/stylesheets/style.css" type="text/css"/>
+    <script src="/javascripts/bundle.js"></script>
+</head>
+<body>
+<div class="container">
+    <div>
+        <form action="/country/email" method="post">
+            Email action-el:
+            <br>
+            <input type="text" name="email"><br>
+            <br>
+            <button type="submit" value="Submit">Submit</button>
+        </form>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <button id="listCitiesBtn">Click me</button>
+        </div>
+        <div>
+            <form id="form" name="form">
+                Email js-el:
+                <br>
+                <input type="text" id="email" name="email"><br>
+                <br>
+                <button id="formBtn" type="button">Submit</button>
+            </form>
+        </div>
+        <br>
+        <div>
+            <form id="dataForm" name="dataForm">
+                Email:
+                <br>
+                <input type="text" id="emailData" name="emailData"><br>
+                <br>
+                Orszag:
+                <br>
+                <select id="countrySelect" name="countrySelect">
+                    <option value="lol">Choose Country</option>
+                </select>
+                <br>
+                Varos:
+                <br>
+                <select id="citySelect" name="citySelect">
+                </select>
+                <br>
+                <button id="sendDataBtn" type="button">Submit</button>
+            </form>
+        </div>
+        <div class="col-md-8">
+            <p>Lorem ipsum ...</p>
+        </div>
+    </div>
+    <div class="row">
+        <div id="content">Dummy Content</div>
+    </div>
+</div>
+</body>
+</html>
