@@ -1,0 +1,53 @@
+@import '../../node_modules/bootstrap/scss/bootstrap';
+
+$font-stack:    Helvetica, sans-serif;
+$primary-color: black;
+//$padding: 50px;
+$backgroundImagePosition: center;
+$backgroundImageRepeat: no-repeat;
+$backgroundImageSize: cover;
+$imageUrl: url("../../resources/lakeForm.jpg");
+$backgroundColor : gray;
+
+html {
+  height: 100%;
+}
+body {
+  //padding: $padding;
+  font: 100% $font-stack,bold,italic;
+  color: $primary-color;
+  height: 100%;
+  background-color: $backgroundColor;
+}
+#page {
+  background: $imageUrl;
+
+  /* Full height */
+  height: 100%;
+
+  /* Center and scale the image nicely */
+  background-position: $backgroundImagePosition;
+  background-repeat: $backgroundImageRepeat;
+  background-size: $backgroundImageSize;
+}
+
+#dataFormId {
+  background-color: snow;
+  max-width: 300px;
+  margin:0 auto;
+  padding: 16px auto;
+}
+
+select {
+  appearance: none;
+  display: none;
+  background: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+button {
+  border: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}

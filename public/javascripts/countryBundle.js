@@ -9,7 +9,7 @@ $(document).ready(function(){
 
     var select = document.getElementById('countrySelect');
 
-    $.get('/country/country', function (data) {
+    $.get('http://localhost:3000/country/country', function (data) {
         for (var i = 0; i<data.length; i++){
             var option = document.createElement('option');
             option.value = data[i];
@@ -18,9 +18,16 @@ $(document).ready(function(){
         }
     });
 });
-
+/*
+$(document).on('unload', function () {
+   document.cookie = 'emailAddress=""';-1;path="/";
+});
+$(document).on('beforeunload',function(){
+    document.cookie = 'emailAddress=""';-1;path="/";
+});
+*/
 function listCities() {
-    $.get('/country/city', function (data) {
+    $.get('http://localhost:3000/country/city', function (data) {
         console.log("asdasd");
         console.log(data);
         var table = document.createElement('table');
@@ -42,7 +49,7 @@ function sendEmail(){
     $.ajax({
         type : "POST",
         contentType : "application/x-www-form-urlencoded",
-        url : window.location + "country/email",
+        url : "http://localhost:3000/country/email",
         data : {email:emailData},
         dataType :'www-form-urlencoded',
         success : function() {
@@ -56,12 +63,17 @@ function sendEmail(){
 function getCities(data) {
     var select = document.getElementById('citySelect');
     console.log('getCities');
+    var exists = false;
+    var options;
     //$.get('/country/city', function (data) {
         for (var i = 0; i < data.length; i++) {
-            var option = document.createElement('option');
-            option.value = data[i];
-            option.innerHTML = data[i];
-            select.appendChild(option);
+            if(document.getElementById(data[i]+'cityID') === null) {
+                    var option = document.createElement('option');
+                    option.id = data[i]+'cityID';
+                    option.value = data[i];
+                    option.innerHTML = data[i];
+                    select.appendChild(option);
+            }
         }
     //});
 }
@@ -69,13 +81,17 @@ function getCities(data) {
 function postCountry() {
     var countryData = document.forms["dataForm"]["countrySelect"].value;
 
+    $('#citySelect').empty();
+
     $.ajax({
         type : "POST",
         contentType : "application/x-www-form-urlencoded",
-        url : window.location + "country/city",
+        url : "http://localhost:3000/country/city",
         data : {country:countryData},
-        dataType :'www-form-urlencoded',
+        dataType :'json',
+        //dataType :'www-form-urlencoded',
         success : function(response) {
+            console.log('Success: ' + response);
             getCities(response);
         },
         error : function(e) {
@@ -91,7 +107,7 @@ function sendData() {
     $.ajax({
         type: "POST",
         contentType: "application/x-www-form-urlencoded",
-        url: window.location + "country/data",
+        url: "http://localhost:3000/country/data",
         data: {email: emailData,country:countryData,city: cityData},
         dataType: 'www-form-urlencoded',
         success: function () {

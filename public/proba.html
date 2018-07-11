@@ -2,9 +2,55 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Probatitle</title>
+    <title>City list Web Application</title>
+    <script src="/javascripts/bundle.js"></script>
+    <!--<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>-->
+    <script src="/javascripts/cookieDeleteBundle.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="http://localhost:3000/css/bootstrap/testSCSS.css" type="text/css"/>
 </head>
-<body>
-<p>Proba</p>
+<body ng-app="cookieDelete" ng-controller="CookieDel">
+<div id="page" class="view">
+    <div class="full-bg-img">
+        <div class="container-fluid">
+            <ul class="nav justify-content-center">
+                <li class="nav-item">
+                    <a class="nav-link" href="http://localhost:3000">Index</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="http://localhost:3000/country/proba">Form</a>
+                </li>
+            </ul>
+            <br>
+            <div class="row">
+                <div id="dataFormId" class="col-12">
+                    <form id="dataForm" name="dataForm">
+                        DataForm:
+                        <br><br>
+                        Email:
+                        <br>
+                        <input type="text" id="emailData" class="form-control" name="emailData"><br>
+                        Orszag:
+                        <br>
+                        <select id="countrySelect" name="countrySelect" class="custom-select">
+                            <option value="lol">Choose Country</option>
+                        </select>
+                        <br><br>
+                        Varos:
+                        <br>
+                        <select id="citySelect" name="citySelect" class="custom-select">
+                        </select>
+                        <br><br>
+                        <button id="sendDataBtn" type="button" class="btn-primary">Submit</button>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+</div>
 </body>
 </html>

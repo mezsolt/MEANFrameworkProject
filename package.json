@@ -4,14 +4,19 @@
   "private": true,
   "scripts": {
     "js": "browserify javascripts/bundle.js | uglifyjs > public/javascripts/bundle.js",
-    "css": "scss scss/myStyle.scss -t compressed public/css/style.css",
+    "css": "scss public/scss/testSCSS.scss -t compressed public/stylesheets/styleSCSS.css",
+    "scss": "node-sass --watch public/scss -o public/css",
     "prestart": "npm run css && npm run javascripts",
     "start": "node ./bin/www"
   },
   "dependencies": {
+    "angular": "^1.7.2",
+    "angular-cookies": "^1.7.2",
     "body-parser": "^1.18.2",
+    "bootstrap": "^4.1.1",
     "bowserify": "^10.2.1",
     "cookie-parser": "~1.4.3",
+    "cookie-session": "^2.0.0-beta.3",
     "debug": "~2.6.9",
     "express": "^4.16.3",
     "form-data": "^2.3.2",

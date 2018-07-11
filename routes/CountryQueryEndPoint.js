@@ -12,11 +12,6 @@ var fs = require('fs');
 
 router.post('/country',function(req,res){
 
-    var countries = [
-        {name:"Albania"},
-        {name:"Nigeria"}
-    ];
-
     var data = req.query.md5;
 
     //crypto.createHash('md5').update(data).digest("hex");
@@ -56,21 +51,12 @@ router.get('/country',function(req,res){
 
     var keys = Object.keys(citiesByCountriesDataRaw);
     for(var i =0 ;i < keys.length; i++) {
-        //if(keys[i]==req.query.country) {
             //res.send(citiesByCountriesDataRaw[keys[i]]);
             //res.send(keys[i]);
             countries[i] = keys[i];
-            //console.log(citiesByCountriesDataRaw[keys[i]]);
-            //console.log(keys[i]);
     }
     res.send(countries);
 });
-
-router.get('/proba',function(req,res){
-    res.send({"asd":"feri"});
-});
-
-
 
 router.post('/city',function(req,res){
 
@@ -79,25 +65,28 @@ router.post('/city',function(req,res){
         res.status(200).send(doc);
     });*/
 
+    console.log();
+
     var citiesByCountriesData2 = fs.readFileSync('../NodejsExpressCalculator/public/resources/citiesByCountriesJson');
     var citiesByCountriesDataRaw = JSON.parse(citiesByCountriesData2);
+
+    var cities = [];
 
     var keys = Object.keys(citiesByCountriesDataRaw);
     for(var i =0 ;i < keys.length; i++) {
         //if(keys[i]==req.query.country) {
         if(keys[i]==req.body.country) {
-            res.send(citiesByCountriesDataRaw[keys[i]]);
+            cities = citiesByCountriesDataRaw[keys[i]];
+            //res.send(citiesByCountriesDataRaw[keys[i]]);
             //res.send([keys[i]]);
-            //console.log(citiesByCountriesDataRaw[keys[i]]);
-            //console.log(keys[i]);
         }
     }
-    //res.send({"asd":"feri"});
+    res.send(cities);
 });
 
 
 router.get('/proba',function(req,res){
-    res.send({"asd":"feri"});
+    res.sendfile('./public/proba.html');
 });
 
 router.put('/country',function(req,res){
@@ -114,7 +103,7 @@ router.put('/country',function(req,res){
     });
 });
 
-router.delete('/country',function(req,res){
+router.delete('/country',function(req,res,next){
     CountrySchema.remove({'name' : req.query['name']}, function(err){console.log(err);});
     res.status(200).send(req.query['name']+' has been removed!');
 });
@@ -129,12 +118,14 @@ router.post('/email', function (req, res) {
         secure: false,
         auth: {
             user: 'nemhotzsolti@hotmail.com',
-            pass: 'asdasd12'
+            pass: '-'
         },
         tls: {
             chipers: "SSLv3"
         }
     });*/
+
+    var pw = fs.readFileSync('../NodejsExpressCalculator/public/resources/pw');
 
     let transporter = nodeMailer.createTransport({
         host: 'smtp.iit.uni-miskolc.hu',
@@ -142,7 +133,7 @@ router.post('/email', function (req, res) {
         secure: false,
         auth: {
             user: 'meszaros8@iit.uni-miskolc.hu',
-            pass: 's5mzgj'
+            pass: pw
         },
         tls: {
             chipers: "SSLv3"
@@ -177,9 +168,11 @@ router.post('/email', function (req, res) {
         console.log('Message %s sent: %s', info.messageId, info.response);
         //res.render('index');
     });
+    res.cookie('emailAddress',req.body.email, { maxAge: 30000, httpOnly: true });
+    next();
 });
 
-router.post('/data', function (req, res) {
+router.post('/data', function (req, res, next) {
 
     /*let transporter = nodeMailer.createTransport({
         host: 'smtp.live.com',
@@ -189,12 +182,14 @@ router.post('/data', function (req, res) {
         secure: false,
         auth: {
             user: 'nemhotzsolti@hotmail.com',
-            pass: 'asdasd12'
+            pass: '-'
         },
         tls: {
             chipers: "SSLv3"
         }
     });*/
+
+    var pw = fs.readFileSync('../NodejsExpressCalculator/public/resources/pw');
 
     let transporter = nodeMailer.createTransport({
         host: 'smtp.iit.uni-miskolc.hu',
@@ -202,7 +197,7 @@ router.post('/data', function (req, res) {
         secure: false,
         auth: {
             user: 'meszaros8@iit.uni-miskolc.hu',
-            pass: 's5mzgj'
+            pass: pw
         },
         tls: {
             chipers: "SSLv3"
@@ -237,6 +232,8 @@ router.post('/data', function (req, res) {
         console.log('Message %s sent: %s', info.messageId, info.response);
         //res.render('index');
     });
+    res.cookie('emailAddress',req.body.email, { maxAge: 30000, httpOnly: true });
+    next();
 });
 
 module.exports = router;
