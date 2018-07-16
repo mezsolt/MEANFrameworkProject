@@ -89,6 +89,22 @@ router.get('/proba',function(req,res){
     res.sendfile('./public/proba.html');
 });
 
+router.get('/material',function(req,res){
+    res.sendfile('./public/material.html');
+});
+
+router.get('/route',function(req,res){
+    res.sendfile('./public/route.html');
+});
+
+router.get('/book',function(req,res){
+    res.sendfile('./public/book.html');
+});
+
+router.get('/chapter',function(req,res){
+    res.sendfile('./public/chapter.html');
+});
+
 router.put('/country',function(req,res){
 
     CountrySchema.find({'name' : req.body['name']}).exec(function(err,countries){

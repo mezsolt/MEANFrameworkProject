@@ -4,53 +4,100 @@
     <meta charset="UTF-8">
     <title>City list Web Application</title>
     <script src="/javascripts/bundle.js"></script>
+    <script src="/javascripts/dataFormBundle.js"></script>
     <!--<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>-->
     <script src="/javascripts/cookieDeleteBundle.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>-->
     <link rel="stylesheet" href="http://localhost:3000/css/bootstrap/testSCSS.css" type="text/css"/>
+    <link rel = "stylesheet"
+          href = "https://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.css">
 </head>
-<body ng-app="cookieDelete" ng-controller="CookieDel">
-<div id="page" class="view">
+<body ng-app="dataForm">
+<div id="page" class="view"  layout="column" layout-padding ng-cloak>
     <div class="full-bg-img">
         <div class="container-fluid">
-            <ul class="nav justify-content-center">
-                <li class="nav-item">
+            <div id="navId">
+                <nav class="navbar navbar-default">
+                    <div class="container-fluid">
+                        <!--<div class="navbar-header">
+                            <a class="navbar-brand" href="#">WebSiteName</a>
+                        </div>-->
+                        <!--<ul class="nav navbar-nav">
+                            <li class="active"><a href="#" class="text-dark">Home</a></li>
+                            <li><a href="country/proba" class="btn btn-info" role="button">Page 1</a></li>
+                            <li><a href="#" class="text-dark">Page 2</a></li>
+                            <li><a href="#" class="text-dark">Page 3</a></li>
+                            <li><button class="btn btn-dark">Page 4</button></li>
+                        </ul>-->
+                        <a href="/" class="btn btn-primary" role="button">Email</a>
+                        <a href="http://localhost:3000/country/proba" class="btn btn-primary" role="button">Form</a>
+                    </div>
+                </nav>
+            </div>
+            <!--<ul class="nav justify-content-center">
+                <li class="nav-item bg-dark">
                     <a class="nav-link" href="http://localhost:3000">Index</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item bg-dark">
                     <a class="nav-link" href="http://localhost:3000/country/proba">Form</a>
                 </li>
-            </ul>
+            </ul>-->
             <br>
-            <div class="row">
-                <div id="dataFormId" class="col-12">
-                    <form id="dataForm" name="dataForm">
-                        DataForm:
-                        <br><br>
-                        Email:
-                        <br>
-                        <input type="text" id="emailData" class="form-control" name="emailData"><br>
-                        Orszag:
-                        <br>
-                        <select id="countrySelect" name="countrySelect" class="custom-select">
+            <br><br><br><br><br>
+                <div id="dataFormId">
+                    <form ng-controller="salary"  id="dataForm" name="dataForm" class="form-control">
+                        <!--    <div>
+                        <label>Country</label>
+                        <select id="countrySelect" name="countrySelect" class="custom-select" placeholder="Country">
                             <option value="lol">Choose Country</option>
                         </select>
-                        <br><br>
-                        Varos:
-                        <br>
-                        <select id="citySelect" name="citySelect" class="custom-select">
+                            </div>
+                        <div>
+                        <label>City</label>
+                        <select id="citySelect" name="citySelect" class="custom-select" placeholder="City">
                         </select>
-                        <br><br>
+                        </div><br>-->
+                        <div>
+                        <md-input-container class="md-block"  flex-gt-sm>
+                            <label>Country</label>
+                            <md-select ng-model="country" ng-change="getCities()">
+                                <md-option ng-repeat="country in countries" value="{{country}}">
+                                    {{country}}
+                                </md-option>
+                            </md-select>
+                        </md-input-container>
+                        </div>
+                        <br>
+                        <md-input-container class="md-block" flex-gt-sm>
+                            <label>City</label>
+                            <md-select ng-model="city" >
+                                <md-option ng-repeat="city in cities" value="{{city}}">
+                                    {{city}}
+                                </md-option>
+                            </md-select>
+                        </md-input-container>
+                        <br>
+                        <div>
+                        <md-input-container class="md-block">
+                            <label>Salary Amount (€)</label>
+                            <input ng-model="dataForm.salary" type="number" step="1">
+                        </md-input-container>
+                        </div>
+                        <div class="text-right">
                         <button id="sendDataBtn" type="button" class="btn-primary">Submit</button>
+                        </div>
                     </form>
-                </div>
             </div>
-
         </div>
     </div>
-</div>
+    <div id="cookieAlert">
+        <div class="alert alert-secondary alert-dismissible">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <strong>Attention!</strong> The website use a cookie.
+        </div>
+    </div>
 </div>
 </body>
 </html>

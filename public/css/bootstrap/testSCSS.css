@@ -6300,11 +6300,14 @@ body {
   background-repeat: no-repeat;
   background-size: cover; }
 
+#cookieAlert {
+  position: fixed;
+  bottom: 5px; }
+
 #dataFormId {
   background-color: snow;
-  max-width: 300px;
-  margin: 0 auto;
-  padding: 16px; }
+  max-width: 500px;
+  margin: 0 auto; }
 
 select {
   appearance: none;
@@ -6317,3 +6320,29 @@ button {
   border: none;
   -webkit-appearance: none;
   -moz-appearance: none; }
+
+/*li {
+  color: white;
+  background: #32383e;
+}*/
+/*ul {
+  color:white ;
+}
+
+.nav {
+  color: white;
+}*/
+#formEmailId {
+  background-color: snow;
+  max-width: 500px;
+  margin: 0 auto; }
+
+.nav {
+  margin: 0 auto;
+  font-color: black; }
+
+.navbar-nav {
+  background-color: snow; }
+
+a {
+  margin: 0 auto; }
