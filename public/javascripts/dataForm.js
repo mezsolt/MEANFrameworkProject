@@ -8,20 +8,14 @@ var dataForm = ng.module('dataForm', [ngcookies,ngMaterial,ngAnimate,ngAria,ngMe
 
 dataForm.controller('salary', ['$scope','$http',
     function($scope,$http){
-        console.log('success');
-        console.log($scope.country);
+        $scope.showAlert = true;
+        var cookieAccept = false;
         $http.get('http://localhost:3000/country/country').then(function success(response) {
             $scope.countries=response.data;
         });
         $scope.getCities = function() {
-            console.log('successGetCititesmethod');
-            console.log($scope.country);
-            $http.post('http://localhost:3000/country/city', {country:$scope.country}).then(function success(response) {
-                console.log('successCitymethod2');
-                console.log(response.data[2]);
-                console.log($scope.country);
-                console.log(response.data);
 
+            $http.post('http://localhost:3000/country/city', {country:$scope.country}).then(function success(response) {
                 var cityList = [];
 
                 for(var i=0;i<response.data.length;i++) {
@@ -35,8 +29,19 @@ dataForm.controller('salary', ['$scope','$http',
                         cityList.push(response.data[i]);
                     }
                 }
-                console.log(cityList);
                 $scope.cities = cityList;
             });
+        }
+        $scope.sendDataToDB = function () {
+            if(cookieAccept != false) {
+                $http.post('http://localhost:3000/country/data', {sex:$scope.sex,age:$scope.age,
+                    country:$scope.country,city:$scope.city,salary:$scope.salary});
+            } else {
+                $scope.showAlert = true;
+            }
+        }
+        $scope.cookieAccepted = function () {
+            $scope.showAlert = false;
+            cookieAccept = true;
         }
     }]);

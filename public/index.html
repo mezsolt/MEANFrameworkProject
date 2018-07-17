@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>City list Web Application</title>
-    <script src="/javascripts/bundle.js"></script>
+    <script src="/javascripts/emailFormBundle.js"></script>
     <!--<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>-->
-    <script src="/javascripts/cookieDeleteBundle.js"></script>
+    <!--<script src="/javascripts/cookieDeleteBundle.js"></script>-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
@@ -14,43 +14,20 @@
           href = "https://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.css">
     <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">-->
 </head>
-<body ng-app="cookieDelete">
+<body ng-app="emailForm" ng-controller="emailFormCtrl as ctrl">
 <div id="page" class="view" layout="column" layout-padding ng-cloak>
 <div class="full-bg-img">
-
-    <!--<div>
-        <div>-->
     <div class="container-fluid">
-        <!--<div id="navDiv">
-        <ul class="nav justify-content-center">
-            <li class="nav-item bg-dark">
-                <a class="nav-link" href="http://localhost:3000">Index</a>
-            </li>
-            <li class="nav-item bg-dark">
-                <a class="nav-link" href="http://localhost:3000/country/proba">Form</a>
-            </li>
-        </ul>
-        </div>-->
         <div id="navId">
             <nav class="navbar navbar-default">
                 <div class="container-fluid">
-                    <!--<div class="navbar-header">
-                        <a class="navbar-brand" href="#">WebSiteName</a>
-                    </div>-->
-                    <!--<ul class="nav navbar-nav">
-                        <li class="active"><a href="#" class="text-dark">Home</a></li>
-                        <li><a href="country/proba" class="btn btn-info" role="button">Page 1</a></li>
-                        <li><a href="#" class="text-dark">Page 2</a></li>
-                        <li><a href="#" class="text-dark">Page 3</a></li>
-                        <li><button class="btn btn-dark">Page 4</button></li>
-                    </ul>-->
                     <a href="#" class="btn btn-primary" role="button">Email</a>
-                    <a href="http://localhost:3000/country/proba" class="btn btn-primary" role="button">Form</a>
+                    <a href="http://localhost:3000/country/form" class="btn btn-primary" role="button">Form</a>
                 </div>
             </nav>
         </div>
         <br><br><br><br><br><br>
-        <div id="formEmailId" ng-controller="inputCtrl as ctrl">
+        <div id="formEmailId" >
                 <form id="form" name="form" class="form-control">
                     <md-input-container class = "md-block">
                     <label>Email</label>
@@ -60,22 +37,19 @@
                         </div>
                     </md-input-container>
                     <div class="text-right">
-                    <button id="formBtn" type="button" class="btn-primary">Submit</button>
+                    <button id="formBtn" type="button" class="btn-primary" ng-click="sendEmail()">Submit</button>
                     </div>
-
                 </form>
-        </div><!--
-        <div ng-controller="CookieDel">
-            <button ng-click="delCookie()">
-                cookieDelete
-            </button>
-        </div>-->
+        </div>
+
     </div>
 </div>
     <div id="cookieAlert">
-    <div class="alert alert-secondary alert-dismissible">
-        <button type="button" class="close" data-dismiss="alert">&times;</button>
-        <strong>Attention!</strong> The website use a cookie.
+    <div ng-show="showAlert == true" class="alert alert-secondary alert-dismissible">
+        <button type="button" class="close" ng-click="showAlert = false">&times;</button>
+        <strong>Attention!</strong> The website use a cookie, accept to use the website functions.
+        <button type="button" class="btn btn-dark" ng-click="cookieAccepted()">Accept.</button>
+        <!--<button type="button" class="btn btn-dark" data-dismiss="alert">Don't accept.</button>-->
     </div>
     </div>
 </div>

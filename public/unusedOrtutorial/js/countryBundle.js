@@ -1,7 +1,6 @@
 var $ = require('jquery');
 
 $(document).ready(function(){
-    alert('hello world');
     $('#listCitiesBtn').click(listCities);
     $('#formBtn').click(sendEmail);
     $('#sendDataBtn').click(sendData);
@@ -11,7 +10,7 @@ $(document).ready(function(){
 
     $.get('http://localhost:3000/country/country', function (data) {
         for (var i = 0; i<data.length; i++){
-            var option = document.createElement('option');
+            var option = document.createElement('md-option');
             option.value = data[i];
             option.innerHTML = data[i];
             select.appendChild(option);

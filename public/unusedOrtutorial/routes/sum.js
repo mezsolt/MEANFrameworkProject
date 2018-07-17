@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var calculatorService = require('../services/calculatorService');
+var calculatorService = require('../../../services/calculatorService');
 var sumSchema = require('./sumSchema');
 var mongoose = require('mongoose');
 
@@ -26,9 +26,9 @@ router.get('/sum',function(req,res)
     console.log(req.query['b']);
     //res.sendStatus(200).send(req.query['a']+req.query['b']);
     res.send({sum:calculatorService.add(parseInt(req.query.a),parseInt(req.query.b))});
-    //res.render('proba.html',{sum: req.params.sum});
-    //res.sendfile('./public/proba.html');
-    //res.sendFile(path.join(__dirname, '../public', 'proba.html'));
+    //res.render('form.html',{sum: req.params.sum});
+    //res.sendfile('./public/form.html');
+    //res.sendFile(path.join(__dirname, '../public', 'form.html'));
 });
 
 router.post('/sumschema',function(req,res){

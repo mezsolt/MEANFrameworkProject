@@ -58,19 +58,6 @@ button {
 }
 
 
-/*li {
-  color: white;
-  background: #32383e;
-}*/
-
-/*ul {
-  color:white ;
-}
-
-.nav {
-  color: white;
-}*/
-
 #formEmailId {
   background-color: snow;
   max-width: 500px;
@@ -79,7 +66,6 @@ button {
 
 .nav {
   margin:0 auto;
-  font-color: black;
 }
 .navbar-nav {
   background-color: snow;
