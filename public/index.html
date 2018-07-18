@@ -3,54 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <title>City list Web Application</title>
-    <script src="/javascripts/emailFormBundle.js"></script>
+    <script src="/javascripts/probaRouteControllerBundle.js"></script>
     <!--<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>-->
     <!--<script src="/javascripts/cookieDeleteBundle.js"></script>-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="css/bootstrap/testSCSS.css" type="text/css"/>
+    <script src="//code.angularjs.org/snapshot/angular-route.js"></script>
+    <script type="text/javascript">
+        angular.element(document.getElementsByTagName('head')).append(angular.element('<base href="' + window.location.pathname + '" />'));
+    </script>
+    <link rel="stylesheet" href="http://localhost:3000/css/bootstrap/testSCSS.css" type="text/css"/>
     <link rel = "stylesheet"
           href = "https://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.css">
     <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">-->
 </head>
-<body ng-app="emailForm" ng-controller="emailFormCtrl as ctrl">
+<body ng-app="ngRouteExample" ng-controller="MainController as ctrl">
 <div id="page" class="view" layout="column" layout-padding ng-cloak>
-<div class="full-bg-img">
-    <div class="container-fluid">
-        <div id="navId">
-            <nav class="navbar navbar-default">
-                <div class="container-fluid">
-                    <a href="#" class="btn btn-primary" role="button">Email</a>
-                    <a href="http://localhost:3000/country/form" class="btn btn-primary" role="button">Form</a>
-                </div>
-            </nav>
-        </div>
-        <br><br><br><br><br><br>
-        <div id="formEmailId" >
-                <form id="form" name="form" class="form-control">
-                    <md-input-container class = "md-block">
-                    <label>Email</label>
-                    <input required type="text" id="email" name="email" class="form-control" ng-model="email" >
-                        <div ng-messages = "form.email.$error">
-                            <div ng-message = "required">This is required.</div>
-                        </div>
-                    </md-input-container>
-                    <div class="text-right">
-                    <button id="formBtn" type="button" class="btn-primary" ng-click="sendEmail()">Submit</button>
+    <div class="full-bg-img">
+        <div class="container-fluid">
+            <div id="navId">
+                <nav class="navbar navbar-default">
+                    <div class="container-fluid">
+                        <!--<a href="http://localhost:3000/country/probaemail" class="btn btn-primary" role="button">Email</a>
+                        <a href="http://localhost:3000/country/probaform" class="btn btn-primary" role="button">Form</a>-->
+                        <button id='navbtn1' class="btn btn-primary" ng-click="goToEmail()">Email</button>
+                        <button id='navbtn2' class="btn btn-primary" ng-click="goToForm()">Form</button>
                     </div>
-                </form>
-        </div>
+                </nav>
+            </div>
+            <br><br><br><br><br><br>
+            <div ng-view>
+            </div>
 
+        </div>
     </div>
-</div>
     <div id="cookieAlert">
-    <div ng-show="showAlert == true" class="alert alert-secondary alert-dismissible">
-        <button type="button" class="close" ng-click="showAlert = false">&times;</button>
-        <strong>Attention!</strong> The website use a cookie, accept to use the website functions.
-        <button type="button" class="btn btn-dark" ng-click="cookieAccepted()">Accept.</button>
-        <!--<button type="button" class="btn btn-dark" data-dismiss="alert">Don't accept.</button>-->
-    </div>
+        <div ng-show="showAlert == true" class="alert alert-secondary alert-dismissible">
+            <button type="button" class="close" ng-click="showAlert = false">&times;</button>
+            <strong>Attention!</strong> The website use a cookie, accept to use the website functions.
+            <button type="button" class="btn btn-dark" ng-click="cookieAccepted()">Accept.</button>
+            <!--<button type="button" class="btn btn-dark" data-dismiss="alert">Don't accept.</button>-->
+        </div>
     </div>
 </div>
 </body>

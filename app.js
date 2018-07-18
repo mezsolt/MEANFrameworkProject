@@ -7,7 +7,7 @@ var bodyParser = require('body-parser');
 var favicon = require('serve-favicon');
 
 var countryRouter = require('./routes/CountryQueryEndPoint');
-
+var indexRouter = require('./routes/indexRouter');
 var app = express();
 
 //app.use(express.static('public'));
@@ -24,7 +24,7 @@ app.use(bodyParser.json({ type: 'application/vnd.api+json' }));
 app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 
 app.use('/country', countryRouter);
-
+app.use('/',indexRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

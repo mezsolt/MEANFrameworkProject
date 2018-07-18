@@ -1,0 +1,62 @@
+<div id="dataFormId">
+    <form id="dataForm" name="dataForm" class="form-control">
+        <md-input-container class="md-block" flex-gt-sm>
+            <label>Sex</label>
+            <md-select ng-model="sex" >
+                <md-option value="male">Male</md-option>
+                <md-option value="female">Female</md-option>
+            </md-select>
+        </md-input-container>
+        <br>
+        <md-input-container class="md-block" flex-gt-sm>
+            <label>Age</label>
+            <md-select ng-model="age" >
+                <md-option value="18-25">18-25</md-option>
+                <md-option value="26-35">26-35</md-option>
+                <md-option value="36-45">36-45</md-option>
+                <md-option value="46-55">46-55</md-option>
+                <md-option value="56-65">56-65</md-option>
+                <md-option value="66-75">66-75</md-option>
+                <md-option value="76-">76-</md-option>
+            </md-select>
+        </md-input-container>
+        <br>
+        <div>
+            <md-input-container class="md-block"  flex-gt-sm>
+                <label>Country</label>
+                <md-select ng-model="country" ng-change="getCities()">
+                    <md-option ng-repeat="country in countries" value="{{country}}">
+                        {{country}}
+                    </md-option>
+                </md-select>
+            </md-input-container>
+        </div>
+        <br>
+        <md-input-container class="md-block" flex-gt-sm>
+            <label>City</label>
+            <md-select ng-model="city" >
+                <md-option ng-repeat="city in cities" value="{{city}}">
+                    {{city}}
+                </md-option>
+            </md-select>
+        </md-input-container>
+        <br>
+        <div>
+            <md-input-container class="md-block">
+                <label>Salary Amount (€)</label>
+                <input ng-model="salary" type="number" step="1">
+            </md-input-container>
+        </div>
+        <div class="text-right">
+            <button id="sendDataBtn" type="button" class="btn-primary" ng-click="sendDataToDB()">Submit</button>
+        </div>
+    </form>
+</div>
+<div id="cookieAlert">
+    <div ng-show="showAlert == true" class="alert alert-secondary alert-dismissible">
+        <button type="button" class="close" ng-click="showAlert = false">&times;</button>
+        <strong>Attention!</strong> The website use a cookie, accept to use the website functions.
+        <button type="button" class="btn btn-dark" ng-click="cookieAccepted()">Accept.</button>
+        <!--<button type="button" class="btn btn-dark" data-dismiss="alert">Don't accept.</button>-->
+    </div>
+</div>

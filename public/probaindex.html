@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>City list Web Application</title>
+    <script src="/javascripts/indexprobaBundle.js"></script>
+    <!--<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>-->
+    <!--<script src="/javascripts/cookieDeleteBundle.js"></script>-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="http://localhost:3000/css/bootstrap/testSCSS.css" type="text/css"/>
+    <link rel = "stylesheet"
+          href = "https://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.css">
+    <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">-->
+</head>
+<body ng-app="probaIndex" ng-controller="probaIndexCtrl as ctrl">
+<div id="page" class="view" layout="column" layout-padding ng-cloak>
+    <div class="full-bg-img">
+        <div class="container-fluid">
+            <br><br><br><br><br><br>
+            <div class="row">
+                <div class="col-6">
+                    <div id="formEmailId" >
+                        <form id="form" name="form" class="form-control">
+                            <md-input-container class = "md-block">
+                                <label>Email</label>
+                                <input required type="text" id="email" name="email" class="form-control" ng-model="email" >
+                                <div ng-messages = "form.email.$error">
+                                    <div ng-message = "required">This is required.</div>
+                                </div>
+                            </md-input-container>
+                            <div class="text-right">
+                                <button id="formBtn" type="button" class="btn-primary" ng-click="sendEmail()">Submit</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="col-6">
+                    <div id="dataFormId">
+                        <form id="dataForm" name="dataForm" class="form-control">
+                            <md-input-container class="md-block" flex-gt-sm>
+                                <label>Sex</label>
+                                <md-select ng-model="sex" >
+                                    <md-option value="male">Male</md-option>
+                                    <md-option value="female">Female</md-option>
+                                </md-select>
+                            </md-input-container>
+                            <br>
+                            <md-input-container class="md-block" flex-gt-sm>
+                                <label>Age</label>
+                                <md-select ng-model="age" >
+                                    <md-option value="18-25">18-25</md-option>
+                                    <md-option value="26-35">26-35</md-option>
+                                    <md-option value="36-45">36-45</md-option>
+                                    <md-option value="46-55">46-55</md-option>
+                                    <md-option value="56-65">56-65</md-option>
+                                    <md-option value="66-75">66-75</md-option>
+                                    <md-option value="76-">76-</md-option>
+                                </md-select>
+                            </md-input-container>
+                            <br>
+                            <div>
+                                <md-input-container class="md-block"  flex-gt-sm>
+                                    <label>Country</label>
+                                    <md-select ng-model="country" ng-change="getCities()">
+                                        <md-option ng-repeat="country in countries" value="{{country}}">
+                                            {{country}}
+                                        </md-option>
+                                    </md-select>
+                                </md-input-container>
+                            </div>
+                            <br>
+                            <md-input-container class="md-block" flex-gt-sm>
+                                <label>City</label>
+                                <md-select ng-model="city" >
+                                    <md-option ng-repeat="city in cities" value="{{city}}">
+                                        {{city}}
+                                    </md-option>
+                                </md-select>
+                            </md-input-container>
+                            <br>
+                            <div>
+                                <md-input-container class="md-block">
+                                    <label>Salary Amount (€)</label>
+                                    <input ng-model="salary" type="number" step="1">
+                                </md-input-container>
+                            </div>
+                            <div class="text-right">
+                                <button id="sendDataBtn" type="button" class="btn-primary" ng-click="sendDataToDB()">Submit</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+    <div id="cookieAlert">
+        <div ng-show="showAlert == true" class="alert alert-secondary alert-dismissible">
+            <button type="button" class="close" ng-click="showAlert = false">&times;</button>
+            <strong>Attention!</strong> The website use a cookie, accept to use the website functions.
+            <button type="button" class="btn btn-dark" ng-click="cookieAccepted()">Accept.</button>
+            <!--<button type="button" class="btn btn-dark" data-dismiss="alert">Don't accept.</button>-->
+        </div>
+    </div>
+</div>
+</body>
+</html>

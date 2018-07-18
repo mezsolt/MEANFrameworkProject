@@ -1,0 +1,22 @@
+<div id="formEmailId">
+    <form id="form" name="form" class="form-control">
+        <md-input-container class = "md-block">
+            <label>Email</label>
+            <input required type="text" id="email" name="email" class="form-control" ng-model="email" >
+            <div ng-messages = "form.email.$error">
+                <div ng-message = "required">This is required.</div>
+            </div>
+        </md-input-container>
+        <div class="text-right">
+            <button id="formBtn" type="button" class="btn-primary" ng-click="sendEmail()">Submit</button>
+        </div>
+    </form>
+</div>
+<div id="cookieAlert">
+    <div ng-show="showAlert == true" class="alert alert-secondary alert-dismissible">
+        <button type="button" class="close" ng-click="showAlert = false">&times;</button>
+        <strong>Attention!</strong> The website use a cookie, accept to use the website functions.
+        <button type="button" class="btn btn-dark" ng-click="cookieAccepted()">Accept.</button>
+        <!--<button type="button" class="btn btn-dark" data-dismiss="alert">Don't accept.</button>-->
+    </div>
+</div>

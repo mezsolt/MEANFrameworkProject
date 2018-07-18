@@ -37,11 +37,13 @@ router.post('/city',function(req,res){
     res.send(cities);
 });
 
-
 router.get('/form',function(req,res){
     res.sendfile('./public/form.html');
 });
 
+router.get('/probaindex',function(req,res){
+    res.sendfile('./public/probaindex.html');
+});
 
 router.post('/email', function (req, res) {
 
