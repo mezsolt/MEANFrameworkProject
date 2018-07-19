@@ -122,7 +122,6 @@ var routeModule = ng.module('routeModule', [ngRoute,ngMaterial,ngAnimate,ngAria,
                     redirectTo: '/'
                 });
 
-            // configure html5 to get links working on jsfiddle
             $locationProvider.html5Mode(true);
         });
 })(window.angular);
