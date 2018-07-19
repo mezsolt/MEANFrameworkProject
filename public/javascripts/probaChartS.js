@@ -70,15 +70,22 @@ probaChart.controller('probaChartCtrl', ['$scope','$http',
                     },
                     animation: {
                         duration: 1,
-                        onComplete: function (animation) {
-                            this.toBase64Image();
+                        onComplete: function done() {
+                            console.log('done');
+                            if(number == 0) {
+                                var image = massPopChart.toBase64Image();
+                                $http.post('http://localhost:3000/probachart', {image: image}, {headers: {'Content-Type': 'application/json'}});
+                            }
+                            number = 1;
+                            //this.toBase64Image();
                         }
                     }
                 }
             });
 
-
+/*
             var image = massPopChart.toBase64Image();
+
             var url_base64 = document.getElementById('myChart').toDataURL('image/png');
 
             document.getElementById("url").src=image;
@@ -86,6 +93,6 @@ probaChart.controller('probaChartCtrl', ['$scope','$http',
             if(number != 0) {
                 $http.post('http://localhost:3000/probachart', {image:image},{headers:{'Content-Type':'application/json'}});
             }
-            number= 1;
+            number= 1;*/
         }
     }]);
