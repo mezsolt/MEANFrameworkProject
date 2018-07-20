@@ -18,6 +18,10 @@ router.get('/probachart',function(req,res){
     res.sendfile(path.resolve('./public/probachart.html'));
 });
 
+router.get('/probatest',function(req,res){
+    res.send('Hello World');
+});
+
 router.post('/probachart',function(req,res){
     var doc = new pdf();
     //var base64Image = req.body.split(';base64,').pop();

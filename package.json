@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
+    "test": "./node_modules/.bin/jasmine-node spec",
     "js": "browserify javascripts/bundle.js | uglifyjs > public/javascripts/bundle.js",
     "css": "scss public/scss/testSCSS.scss -t compressed public/stylesheets/styleSCSS.css",
     "scss": "node-sass --watch public/scss -o public/css",
@@ -32,6 +33,8 @@
     "express": "^4.16.3",
     "form-data": "^2.3.2",
     "http-errors": "~1.6.2",
+    "jasmine": "^3.1.0",
+    "jasmine-node": "^1.15.0",
     "jquery": "^3.3.1",
     "jsdom": "^11.11.0",
     "json-parser": "^1.1.5",
@@ -44,6 +47,7 @@
     "nodemon": "^1.17.5",
     "pdfkit": "^0.8.3",
     "pug": "2.0.0-beta11",
+    "request": "^2.87.0",
     "serve-favicon": "^2.5.0",
     "tls-connect": "^0.2.2",
     "uglify-js": "^3.3.21"
