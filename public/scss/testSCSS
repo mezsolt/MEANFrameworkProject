@@ -4,9 +4,9 @@ $font-stack:    Helvetica, sans-serif;
 $primary-color: black;
 //$padding: 50px;
 $backgroundImagePosition: center;
-$backgroundImageRepeat: no-repeat;
+$backgroundImageRepeat: repeat;
 $backgroundImageSize: cover;
-$imageUrl: url("../../resources/lakeForm.jpg");
+$imageUrl: url("../../resources/nature1.jpg");
 $backgroundColor : gray;
 
 html {
@@ -18,13 +18,16 @@ body {
   color: $primary-color;
   height: 100%;
   background-color: $backgroundColor;
+  //background-size: 100% 100%;
+
 }
 #page {
-  background: $imageUrl;
+
 
   /* Full height */
   height: 100%;
 
+  background: $imageUrl;
   /* Center and scale the image nicely */
   background-position: $backgroundImagePosition;
   background-repeat: $backgroundImageRepeat;
@@ -38,7 +41,7 @@ body {
 
 #dataFormId {
   background-color: snow;
-  max-width: 500px;
+  max-width: 1000px;
   margin:0 auto;
   //padding: 16px auto;
 }
@@ -78,3 +81,12 @@ a {
 #navbtn1, #navbtn2 {
   margin:0 auto;
 }
+/*
+md-input-container.md-input-focused label {
+  color: green !important;
+}
+
+.animate-show.ng-hide {
+  opacity: 0 !important;
+}
+*/

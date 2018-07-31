@@ -14,7 +14,6 @@ dataForm.controller('salary', ['$scope','$http',
             $scope.countries=response.data;
         });
         $scope.getCities = function() {
-
             $http.post('http://localhost:3000/country/city', {country:$scope.country}).then(function success(response) {
                 var cityList = [];
 

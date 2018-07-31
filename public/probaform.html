@@ -1,5 +1,6 @@
 <div id="dataFormId">
-    <form id="dataForm" name="dataForm" class="form-control">
+    <form id="dataForm" name="dataForm" class="form-control" ng-controller="dataController as ctrl" ng-submit="$event.preventDefault()">
+        <md-content layout-gt-sm="row" layout-padding>
         <md-input-container class="md-block" flex-gt-sm>
             <label>Sex</label>
             <md-select ng-model="sex" >
@@ -7,7 +8,6 @@
                 <md-option value="female">Female</md-option>
             </md-select>
         </md-input-container>
-        <br>
         <md-input-container class="md-block" flex-gt-sm>
             <label>Age</label>
             <md-select ng-model="age" >
@@ -16,12 +16,10 @@
                 <md-option value="36-45">36-45</md-option>
                 <md-option value="46-55">46-55</md-option>
                 <md-option value="56-65">56-65</md-option>
-                <md-option value="66-75">66-75</md-option>
-                <md-option value="76-">76-</md-option>
             </md-select>
         </md-input-container>
-        <br>
-        <div>
+        </md-content>
+        <md-content layout-gt-sm="row" layout-padding>
             <md-input-container class="md-block"  flex-gt-sm>
                 <label>Country</label>
                 <md-select ng-model="country" ng-change="getCities()">
@@ -30,8 +28,6 @@
                     </md-option>
                 </md-select>
             </md-input-container>
-        </div>
-        <br>
         <md-input-container class="md-block" flex-gt-sm>
             <label>City</label>
             <md-select ng-model="city" >
@@ -40,15 +36,91 @@
                 </md-option>
             </md-select>
         </md-input-container>
-        <br>
-        <div>
-            <md-input-container class="md-block">
-                <label>Salary Amount (€)</label>
+        </md-content>
+        <md-content layout-gt-sm="row" layout-padding>
+        <md-input-container class="md-block" flex-gt-sm>
+            <label>Educational attainment</label>
+            <md-select ng-model="educationalAttainment" >
+                <md-option value="elementarySchool">Elementary school</md-option>
+                <md-option value="middleSchool">Middle school</md-option>
+                <md-option value="highSchool">High school</md-option>
+                <md-option value="college">College</md-option>
+                <md-option value="universityBsc">University BSc</md-option>
+                <md-option value="universityMsc">University MSc</md-option>
+                <md-option value="universityPhd">University PhD</md-option>
+            </md-select>
+        </md-input-container>
+            <md-input-container class="md-block" flex-gt-sm>
+                <label>Experience</label>
+                <md-select ng-model="experience" >
+                    <md-option value="0-1">0-1 year</md-option>
+                    <md-option value="2-4 years">2-4 years</md-option>
+                    <md-option value="5-10 years">5-10 years</md-option>
+                    <md-option value="10+ years">10+ years</md-option>
+                </md-select>
+            </md-input-container>
+       <!-- <br>
+            <md-input-container class="md-block"  flex-gt-sm>
+                <label>Occupation</label>
+                <md-select ng-model="occupation" ng-change="getRoles()">
+                    <md-option ng-repeat="occupation in occupations" value="{{occupation}}">
+                        {{occupation}}
+                    </md-option>
+                </md-select>
+            </md-input-container>
+        </md-content>
+        <br>-->
+        </md-content>
+        <md-content layout-gt-sm="row" layout-padding>
+        <!--<md-input-container class="md-block" flex-gt-sm>
+            <label>Role</label>
+            <md-select ng-model="role" >
+                <md-option ng-repeat="role in roles" value="{{role}}">
+                    {{role}}
+                </md-option>
+            </md-select>
+        </md-input-container>-->
+            <md-autocomplete class="md-block" flex-gt-sm
+                             ng-disabled="ctrl.isDisabled"
+                             md-no-cache="ctrl.noCache"
+                             md-selected-item="ctrl.selectedItemOccupation"
+                             md-search-text-change="ctrl.searchTextChangeOccupation(ctrl.searchTextOccupation)"
+                             md-search-text="ctrl.searchTextOccupation"
+                             md-selected-item-change="ctrl.selectedItemChangeOccupation(item)"
+                             md-items="item in ctrl.querySearchOccupation(ctrl.searchTextOccupation)"
+                             md-item-text="item.display"
+                             md-min-length="0"
+                             placeholder="Occupation"
+                             md-clear-button="true">
+                <md-item-template>
+                    <span md-highlight-text="ctrl.searchTextOccupation" md-highlight-flags="^i">{{item.display}}</span>
+                </md-item-template>
+            </md-autocomplete>
+        <md-autocomplete class="md-block" flex-gt-sm
+                ng-disabled="ctrl.isDisabled"
+                md-no-cache="ctrl.noCache"
+                md-selected-item="ctrl.selectedItem"
+                md-search-text-change="ctrl.searchTextChange(ctrl.searchText)"
+                md-search-text="ctrl.searchText"
+                md-selected-item-change="ctrl.selectedItemChange(item)"
+                md-items="item in ctrl.querySearch(ctrl.searchText)"
+                md-item-text="item.display"
+                md-min-length="0"
+                placeholder="Role"
+                         md-clear-button="true">
+            <md-item-template>
+                <span md-highlight-text="ctrl.searchText" md-highlight-flags="^i">{{item.display}}</span>
+            </md-item-template>
+        </md-autocomplete>
+        </md-content>
+        <md-content layout-gt-sm="row" layout-padding>
+            <md-input-container class="md-block" flex-gt-sm>
+                <label>Gross salary (€)</label>
                 <input ng-model="salary" type="number" step="1">
             </md-input-container>
-        </div>
+        </md-content>
         <div class="text-right">
-            <button id="sendDataBtn" type="button" class="btn-primary" ng-click="sendDataToDB()">Submit</button>
+            <button id="sendDataBtn" type="button" class="btn-success" ng-click="sendDataToDB()">Submit</button>
         </div>
     </form>
 </div>

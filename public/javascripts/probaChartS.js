@@ -14,7 +14,7 @@ probaChart.controller('probaChartCtrl', ['$scope','$http',
             Chart.defaults.global.defaultFontColor = '#777';
 
             let massPopChart = new Chart(myChart, {
-                type:'polarArea', // bar, horizontalBar, pie, line, doughnut, radar, polarArea
+                type:'polarArea', // bar, horizontalBar, pie.js, line, doughnut, radar, polarArea
                 data:{
                     labels:['Boston', 'Worcester', 'Springfield', 'Lowell', 'Cambridge', 'New Bedford'],
                     datasets:[{
@@ -83,7 +83,7 @@ probaChart.controller('probaChartCtrl', ['$scope','$http',
                 }
             });
 
-/*
+            /*
             var image = massPopChart.toBase64Image();
 
             var url_base64 = document.getElementById('myChart').toDataURL('image/png');
