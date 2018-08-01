@@ -8,11 +8,6 @@ var nodeMailer = require('nodemailer');
 var fs = require('fs');
 var node_xj = require("xls-to-json");
 
-router.get('/cucc',function(req,res){
-
-    res.send('egy, ketto, harom');
-});
-
 router.get('/excel',function(req,res){
     node_xj({
         input: "./public/resources/MunkakKesz.xls",  // input xls

@@ -4,8 +4,6 @@
     <meta charset="UTF-8">
     <title>City list Web Application</title>
     <script src="/javascripts/probaRouteControllerBundle.js"></script>
-    <!--<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>-->
-    <!--<script src="/javascripts/cookieDeleteBundle.js"></script>-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
@@ -15,8 +13,7 @@
     </script>
     <link rel="stylesheet" href="http://localhost:3000/css/bootstrap/testSCSS.css" type="text/css"/>
     <link rel = "stylesheet"
-          href = "https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
-    <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">-->
+          href = "https://ajax.googleapis.com/ajax/libs/angular_material/1.1.4/angular-material.min.css">
 </head>
 <body ng-app="ngRouteExample" ng-controller="MainController as ctrl">
 <div id="page" class="view" layout="column" layout-padding ng-cloak>
@@ -25,8 +22,6 @@
             <div id="navId">
                 <nav class="navbar navbar-default">
                     <div class="container-fluid">
-                        <!--<a href="http://localhost:3000/country/probaemail" class="btn btn-primary" role="button">Email</a>
-                        <a href="http://localhost:3000/country/probaform" class="btn btn-primary" role="button">Form</a>-->
                         <button id='navbtn1' class="btn btn-success" ng-click="goToEmail()">Email</button>
                         <button id='navbtn2' class="btn btn-success" ng-click="goToForm()">Form</button>
                     </div>
@@ -43,7 +38,6 @@
             <button type="button" class="close" ng-click="showAlert = false">&times;</button>
             <strong>Attention!</strong> The website use a cookie, accept to use the website functions.
             <button type="button" class="btn btn-dark" ng-click="cookieAccepted()">Accept.</button>
-            <!--<button type="button" class="btn btn-dark" data-dismiss="alert">Don't accept.</button>-->
         </div>
     </div>
 </div>

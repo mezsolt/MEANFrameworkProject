@@ -43,8 +43,9 @@ body {
   background-color: snow;
   max-width: 1000px;
   margin:0 auto;
-  //padding: 16px auto;
+  //padding: 32px auto;
 }
+
 
 select {
   appearance: none;

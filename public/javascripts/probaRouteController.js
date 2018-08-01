@@ -5,8 +5,7 @@ var ngAria = require('angular-aria');
 var ngMessages = require('angular-messages');
 var ngRoute = require('angular-route');
 var ngCookies = require('angular-cookies');
-var routeModule = ng.module('routeModule', [ngRoute,ngMaterial,ngAnimate,ngAria,ngMessages]);
-
+//var routeModule = ng.module('routeModule', [ngRoute,ngMaterial,ngAnimate,ngAria,ngMessages]);
 
 (function(angular) {
     'use strict';
@@ -25,8 +24,6 @@ var routeModule = ng.module('routeModule', [ngRoute,ngMaterial,ngAnimate,ngAria,
                 $scope.showAlert = false;
                 $cookies.put('cookieAccepted', 'true');
             }
-
-
 
            $scope.goToEmail = function() {
                 if($cookies.get('cookieAccepted') === 'true') {
@@ -68,41 +65,28 @@ var routeModule = ng.module('routeModule', [ngRoute,ngMaterial,ngAnimate,ngAria,
 
         .controller('dataController',function ($scope,$http,$cookies,$log,$timeout,$q, $route, $routeParams, $location) {
 
+            $scope.cityEnabled = false;
+            $scope.roleEnabled = false;
+
             var self = this;
 
             self.simulateQuery = false;
-            self.isDisabled    = false;
-
+            self.isDisabledRole = true;
+            self.isDisabledOccupation = false;
             // list of `state` value/display objects
-            self.states = loadAll();
-            self.querySearch   = querySearch;
+            self.querySearchRole   = querySearchRole;
             self.querySearchOccupation = querySearchOccupation;
-            self.selectedItemChange = selectedItemChange;
-            self.searchTextChange   = searchTextChange;
-
+            self.selectedItemChangeRole = selectedItemChangeRole;
+            self.searchTextChangeRole   = searchTextChangeRole;
             self.selectedItemChangeOccupation = selectedItemChangeOccupation;
             self.searchTextChangeOccupation   = searchTextChangeOccupation;
+            self.newRole = newRole;
+            self.newOccupation = newOccupation;
 
-            self.newState = newState;
-            self.newStateOccupation = newStateOccupation;
-            //$scope.valamik = loadAll();
-
-            /**
-             * Search for states... use $timeout to simulate
-             * remote dataservice call.
-             */
-            function querySearch (query) {
-                var results = query ? $scope.valamik.filter( createFilterFor(query) ) : $scope.valamik,
+            function querySearchRole(query) {
+                var results = query ? $scope.roles.filter( createFilterFor(query) ) : $scope.roles,
                     deferred;
                 return results;
-                /*if (self.simulateQuery) {
-                    deferred = $q.defer();
-                    $timeout(function () { deferred.resolve( results ); }, Math.random() * 1000, false);
-                    return deferred.promise;
-                } else {
-                    console.log(results);
-                    return results;
-                }*/
             }
 
             function querySearchOccupation(query) {
@@ -111,30 +95,29 @@ var routeModule = ng.module('routeModule', [ngRoute,ngMaterial,ngAnimate,ngAria,
                 return results;
             }
 
-            function newState(state) {
+            function newRole(state) {
                 alert("Sorry! You'll need to create a Constitution for " + state + " first!");
             }
 
-            function newStateOccupation(state) {
+            function newOccupation(state) {
                 alert("Sorry! You'll need to create a Constitution for " + state + " first!");
             }
 
-            // ******************************
-            // Internal methods
-            // ******************************
-
-
-
-            function searchTextChange(text) {
+            function searchTextChangeRole(text) {
                 $log.info('Text changed to ' + text);
             }
 
-            function selectedItemChange(item) {
+            function selectedItemChangeRole(item) {
                 $log.info('Item changed to ' + JSON.stringify(item));
             }
 
             function searchTextChangeOccupation(text) {
                 $log.info('Text changed to ' + text);
+                if(text==='') {
+                    self.searchTextRole = '';
+                    self.selectedItemRole = '';
+                    self.isDisabledRole = true;
+                }
                 //$scope.getRoles();
             }
 
@@ -144,53 +127,17 @@ var routeModule = ng.module('routeModule', [ngRoute,ngMaterial,ngAnimate,ngAria,
                 for(var i=0;i<list.length;i++) {
                     console.log(list[i]);
                     if(item.display === list[i]) {*/
-                        $http.post('http://localhost:3000/country/role', {occupation:item.display}).then(function success(response) {
-                            $scope.valamik = loadAll2(response.data);
-                        });
+                $http.post('http://localhost:3000/country/role', {occupation:item.display}).then(function success(response) {
+                    self.searchTextRole = "";
+                    self.isDisabledRole = false;
+                    $scope.roles = convertJsonToValueDisplayFormat(response.data);
+                });
                    /* }
                 }*/
                 $log.info('Item changed to ' + JSON.stringify(item));
             }
 
-            /**
-             * Build `states` list of key/value pairs
-             */
-            function loadAll() {
-                var allStates = 'Alabama, Alaska, Arizona, Arkansas, California, Colorado, Connecticut, Delaware,\
-              Florida, Georgia, Hawaii, Idaho, Illinois, Indiana, Iowa, Kansas, Kentucky, Louisiana,\
-              Maine, Maryland, Massachusetts, Michigan, Minnesota, Mississippi, Missouri, Montana,\
-              Nebraska, Nevada, New Hampshire, New Jersey, New Mexico, New York, North Carolina,\
-              North Dakota, Ohio, Oklahoma, Oregon, Pennsylvania, Rhode Island, South Carolina,\
-              South Dakota, Tennessee, Texas, Utah, Vermont, Virginia, Washington, West Virginia,\
-              Wisconsin, Wyoming';
-
-                /*var list = '';
-                var listJson;
-
-                $http.get('http://localhost:3000/country/country').then(function success(response) {
-                    listJson = response.data;
-                    list = JSON.stringify(listJson);
-                });*/
-
-                return allStates.split(/, +/g).map( function (listElem) {
-                    //console.log('list cucc split: '+list);
-                    return {
-                        value: listElem.toLowerCase(),
-                        display: listElem
-                    };
-                });
-
-            }
-
-            $scope.httpCucc = function() {
-                console.log('httpCucc');
-                $http.get('http://localhost:3000/country/cucc').then(function success(response) {
-                 $scope.valamik = loadAll2(response.data);
-                });
-            }
-
-            function loadAll2(cucc) {
-                //var allStates = 'egy, ketto';
+            function convertJsonToValueDisplayFormat(cucc) {
                 var string = '';
                 for(var i=0;i<cucc.length;i++) {
                     if(i == cucc.length-1) {
@@ -198,35 +145,22 @@ var routeModule = ng.module('routeModule', [ngRoute,ngMaterial,ngAnimate,ngAria,
                     } else {
                         string = string + cucc[i] +',, ';
                     }
-
                 }
                 console.log(string);
-                /*var list = '';
-                var listJson;
-
-                $http.get('http://localhost:3000/country/country').then(function success(response) {
-                    listJson = response.data;
-                    list = JSON.stringify(listJson);
-                });*/
 
                 return string.split(/,, +/g).map( function (listElem) {
-                    //console.log('list cucc split: '+list);
                     return {
                         value: listElem.toLowerCase(),
                         display: listElem
                     };
                 });
-
             }
 
-            /**
-             * Create filter function for a query string
-             */
             function createFilterFor(query) {
                 var lowercaseQuery = query.toLowerCase();
 
-                return function filterFn(state) {
-                    return (state.value.indexOf(lowercaseQuery) === 0);
+                return function filterFn(string) {
+                    return (string.value.indexOf(lowercaseQuery) >= 0);
                 };
 
             }
@@ -240,15 +174,17 @@ var routeModule = ng.module('routeModule', [ngRoute,ngMaterial,ngAnimate,ngAria,
                 $scope.showAlert = false;
                 $cookies.put('cookieAccepted', 'true');
             }
+
             $http.get('http://localhost:3000/country/country').then(function success(response) {
                 $scope.countries=response.data;
             });
+
             $http.get('http://localhost:3000/country/occupation').then(function success(response) {
                 $scope.occupations=response.data;
-                $scope.occupationList = loadAll2(response.data);
+                $scope.occupationList = convertJsonToValueDisplayFormat(response.data);
             });
-            $scope.getCities = function() {
 
+            $scope.getCities = function() {
                 $http.post('http://localhost:3000/country/city', {country:$scope.country}).then(function success(response) {
                     var cityList = [];
 
@@ -263,16 +199,19 @@ var routeModule = ng.module('routeModule', [ngRoute,ngMaterial,ngAnimate,ngAria,
                             cityList.push(response.data[i]);
                         }
                     }
+                    $scope.city = "";
                     $scope.cities = cityList;
+                    $scope.cityEnabled = true;
                     return cityList;
                 });
             }
-            $scope.getRoles = function() {
+
+            /*$scope.getRoles = function() {
                 $http.post('http://localhost:3000/country/role', {occupation:$scope.occupation}).then(function success(response) {
                     $scope.roles = response.data;
-                    $scope.valamik = loadAll2(response.data);
+                    $scope.roles = convertJsonToValueDisplayFormat(response.data);
                 });
-            }
+            }*/
 
             $scope.sendDataToDB = function () {
                 if($cookies.get('cookieAccepted') === 'true') {
