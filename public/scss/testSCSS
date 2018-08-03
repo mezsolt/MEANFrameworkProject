@@ -39,6 +39,26 @@ body {
   bottom : 5px;
 }
 
+#messageID {
+ margin: 0 auto;
+  max-width: 750px;
+}
+
+#warningID {
+  margin: 0 auto;
+  max-width: 750px;
+}
+
+#welcomeID {
+  margin: 0 auto;
+  max-width: 750px;
+}
+
+#wrongEmailID {
+  margin: 0 auto;
+  max-width: 750px;
+}
+
 #dataFormId {
   background-color: snow;
   max-width: 1000px;

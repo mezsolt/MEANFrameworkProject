@@ -184,6 +184,10 @@ router.post('/data', function (req, res, next) {
         age: req.body.age,
         country: req.body.country,
         city: req.body.city,
+        educationalAttainment: req.body.educationalAttainment,
+        experience: req.body.experience,
+        occupation:req.body.occupation,
+        role:req.body.role,
         salary: req.body.salary,
         date: Date.now()
     }, function (err,doc) {

@@ -42,6 +42,13 @@ var ngCookies = require('angular-cookies');
             }
         })
         .controller('emailController',function ($scope,$http,$cookies, $route, $routeParams, $location) {
+            $scope.emailWarning = false;
+
+            function validateEmail(email) {
+                var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+                return re.test(String(email).toLowerCase());
+            }
+
             if($cookies.get('cookieAccepted') === 'true') {
                 $scope.showAlert = false;
             } else {
@@ -50,8 +57,19 @@ var ngCookies = require('angular-cookies');
             $scope.sendEmail = function () {
                 console.log("sendemail main " + $cookies.get('cookieAccepted'));
                 if($cookies.get('cookieAccepted') === 'true') {
-                    console.log("sendemail if ");
-                    $http.post('http://localhost:3000/country/email', {email:$scope.email});
+                    if($scope.email != undefined ) {
+                        if(validateEmail($scope.email)) {
+                            console.log($scope.email);
+                            $http.post('http://localhost:3000/country/email', {email:$scope.email});
+                            $location.url('/emailty');
+                        } else {
+                            $scope.emailWarning = true;
+                        }
+                    } else {
+                        console.log($scope.email);
+                        $scope.emailWarning = true;
+                    }
+
                 } else {
                     console.log("sendemail else");
                     $scope.showAlert = true;
@@ -64,9 +82,15 @@ var ngCookies = require('angular-cookies');
         })
 
         .controller('dataController',function ($scope,$http,$cookies,$log,$timeout,$q, $route, $routeParams, $location) {
-
             $scope.cityEnabled = false;
             $scope.roleEnabled = false;
+            $scope.formEnabled = true;
+
+            $scope.warning = false;
+            $scope.message = false;
+
+            $scope.cityTooltip = true;
+            $scope.roleTooltip = true;
 
             var self = this;
 
@@ -117,6 +141,7 @@ var ngCookies = require('angular-cookies');
                     self.searchTextRole = '';
                     self.selectedItemRole = '';
                     self.isDisabledRole = true;
+                    $scope.roleTooltip = true;
                 }
                 //$scope.getRoles();
             }
@@ -134,6 +159,9 @@ var ngCookies = require('angular-cookies');
                 });
                    /* }
                 }*/
+                console.log($scope.roleTooltip);
+                $scope.roleTooltip = false;
+                console.log($scope.roleTooltip);
                 $log.info('Item changed to ' + JSON.stringify(item));
             }
 
@@ -202,6 +230,7 @@ var ngCookies = require('angular-cookies');
                     $scope.city = "";
                     $scope.cities = cityList;
                     $scope.cityEnabled = true;
+                    $scope.cityTooltip = false;
                     return cityList;
                 });
             }
@@ -214,12 +243,28 @@ var ngCookies = require('angular-cookies');
             }*/
 
             $scope.sendDataToDB = function () {
-                if($cookies.get('cookieAccepted') === 'true') {
-                    $http.post('http://localhost:3000/country/data', {sex:$scope.sex,age:$scope.age,
-                        country:$scope.country,city:$scope.city,salary:$scope.salary});
+                if($scope.sex === undefined || $scope.age === undefined || $scope.country === undefined || $scope.city === undefined ||
+                    $scope.educationalAttainment === undefined || $scope.experience === undefined || self.selectedItemOccupation.display === undefined
+                    || self.selectedItemRole.display === undefined || $scope.salary === undefined) {
+                    $scope.message = false;
+                    $scope.warning = true;
+                    console.log('form validation error' + $scope.educationalAttainment + $scope.experience + $scope.sex + $scope.age + $scope.country +$scope.city+$scope.salary+self.selectedItemRole.display+self.selectedItemOccupation.display+$scope.salary);
                 } else {
-                    $scope.showAlert = true;
+                    console.log('else if');
+                    console.log($scope.sex);
+                    if($cookies.get('cookieAccepted') === 'true') {
+                        $http.post('http://localhost:3000/country/data', {sex:$scope.sex,age:$scope.age,
+                            country:$scope.country,city:$scope.city,educationalAttainment:$scope.educationalAttainment,
+                            experience:$scope.experience,occupation:self.selectedItemOccupation.display,
+                            role:self.selectedItemRole.display,salary:$scope.salary});
+                        $scope.warning = false;
+                        $scope.formEnabled = false;
+                        $scope.message = true;
+                    } else {
+                        $scope.showAlert = true;
+                    }
                 }
+
             }
         })
 
@@ -228,9 +273,13 @@ var ngCookies = require('angular-cookies');
                 .primaryPalette('green')
                 .accentPalette('green');
             $routeProvider
-                .when('/probaemail', {
-                    redirectTo:'/'
+                .when('/', {
+                    templateUrl: '/probaemail.html',
+                    controller: 'emailController'
                 })
+                /*.when('/probaemail', {
+                    redirectTo:'/'
+                })*/
                 .when('/probaemail', {
                     templateUrl: '/probaemail.html',
                     controller: 'emailController',
@@ -238,6 +287,10 @@ var ngCookies = require('angular-cookies');
                 .when('/probaform', {
                     templateUrl: '/probaform.html',
                     controller: 'dataController'
+                })
+                .when('/emailty', {
+                    templateUrl: '/emailty.html'
+                    //controller: 'dataController'
                 })
                 .otherwise({
                     redirectTo: '/'

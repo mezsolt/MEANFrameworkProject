@@ -1,3 +1,7 @@
+<div id="welcomeID" class="alert alert-secondary text-center">
+    <strong>Welcome to the site. You can learn statistics about your job.</strong>
+</div>
+<br>
 <div id="formEmailId">
     <form id="form" name="form" class="form-control">
         <md-input-container class = "md-block">
@@ -12,8 +16,14 @@
         </div>
     </form>
 </div>
-<div id="cookieAlert">
-    <div ng-show="showAlert == true" class="alert alert-secondary alert-dismissible">
+<br>
+<div id="wrongEmailID">
+    <div ng-show="emailWarning" class="alert alert-danger text-center">
+        <strong>Please type in your correct email address.</strong>
+    </div>
+</div>
+<div id="cookieAlert" >
+    <div ng-show="showAlert == true" class="alert alert-secondary alert-dismissible text-center">
         <button type="button" class="close" ng-click="showAlert = false">&times;</button>
         <strong>Attention!</strong> The website use a cookie, accept to use the website functions.
         <button type="button" class="btn btn-dark" ng-click="cookieAccepted()">Accept.</button>

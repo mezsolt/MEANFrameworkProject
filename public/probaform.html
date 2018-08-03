@@ -1,5 +1,6 @@
-<div id="dataFormId">
-    <form id="dataForm" name="dataForm" class="form-control" ng-controller="dataController as ctrl"> <!--ng-submit="$event.preventDefault()"-->
+<div ng-controller="dataController as ctrl">
+    <div id="dataFormId" >
+    <form id="dataForm" name="dataForm" class="form-control" ng-show="formEnabled === true"> <!--ng-submit="$event.preventDefault()"-->
         <md-content layout-gt-sm="row" layout-padding>
         <md-input-container class="md-block" flex-gt-sm>
             <label>Sex</label>
@@ -31,6 +32,7 @@
             </md-input-container>
             <br><br><br>
         <md-input-container class="md-block" flex-gt-sm >
+            <md-tooltip ng-show="cityTooltip" md-z-index="100" md-direction="top">Please select a country first!</md-tooltip>
             <label>City</label>
             <md-select ng-model="city" ng-disabled="cityEnabled === false" required>
                 <md-option ng-repeat="city in cities" value="{{city}}">
@@ -81,6 +83,8 @@
                     <span md-highlight-text="ctrl.searchTextOccupation" md-highlight-flags="^i">{{item.display}}</span>
                 </md-item-template>
             </md-autocomplete>
+            <div>
+                <md-tooltip ng-show="roleTooltip" md-z-index="100" md-direction="top">Please select an occupation first!</md-tooltip>
         <md-autocomplete class="md-block" flex-gt-sm
                 ng-disabled="ctrl.isDisabledRole"
                 md-no-cache="ctrl.noCache"
@@ -96,10 +100,8 @@
             <md-item-template >
                 <span md-highlight-text="ctrl.searchTextRole" md-highlight-flags="^i" >{{item.display}}</span>
             </md-item-template>
-            <md-not-found>
-                Please select an occupation.
-            </md-not-found>
         </md-autocomplete>
+            </div>
             <br>
         </md-content>
             <md-input-container class="md-block">
@@ -114,10 +116,22 @@
         </div>
     </form>
 </div>
+    <br>
+    <div id="messageID">
+        <div ng-show="message" class="alert alert-success text-center">
+            <strong>Thank you for your participation. The statistics has been sent to your email address.</strong>
+        </div>
+    </div>
+    <div id="warningID">
+        <div ng-show="warning" class="alert alert-danger text-center">
+            <strong>Please fill everything on the form.</strong>
+        </div>
+    </div>
 <div id="cookieAlert">
-    <div ng-show="showAlert == true" class="alert alert-secondary alert-dismissible">
-        <button type="button" class="close" ng-click="showAlert = false">&times;</button>
+    <div ng-show="showAlert == true" class="alert alert-secondary alert-dismissible text-center">
+        <button type="button" class="close" ng-click="showAlert = false">&times</button>
         <strong>Attention!</strong> The website use a cookie, accept to use the website functions.
         <button type="button" class="btn btn-dark" ng-click="cookieAccepted()">Accept.</button>
     </div>
+</div>
 </div>

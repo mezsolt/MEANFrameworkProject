@@ -18,6 +18,11 @@ router.get('/probaform',function(req,res){
     res.sendfile(path.resolve('./public/index.html'));
 });
 
+router.get('/emailty',function(req,res){
+    res.sendfile(path.resolve('./public/emailty.html'));
+});
+
+
 router.get('/probachart',function(req,res){
     res.sendfile(path.resolve('./public/probachart.html'));
 });

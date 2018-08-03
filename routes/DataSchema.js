@@ -16,6 +16,10 @@ var CountrySchema = new Schema({
     age: String,
     country: String,
     city: String,
+    educationalAttainment: String,
+    experience: String,
+    occupation: String,
+    role: String,
     salary: Number,
     date: Date
 });
